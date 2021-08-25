@@ -50,6 +50,7 @@ Things you may want to cover:
 | --------------------- | ---------- | ------------------------------ |
 | name                  | string     | null: false                    |
 | info                  | text       | null: false                    |
+| category_id           | integer    | null: false                    |
 | sales_status_id       | integer    | null: false                    |
 | shipping_fee_id       | integer    | null: false                    |
 | prefecture_id         | integer    | null: false                    |
@@ -61,6 +62,7 @@ Things you may want to cover:
 
 - belongs_to :user
 - has_one :order
+- belongs_to_active_hash :category_id
 - belongs_to_active_hash :sales_status_id
 - belongs_to_active_hash :shipping_fee_id
 - belongs_to_active_hash :prefecture_id
