@@ -28,16 +28,16 @@ Things you may want to cover:
 
 ## users テーブル
 
-| Column             | Type    | Options      |
-| ------------------ | ------- | ------------ |
-| nickname           | text    | null: false  |
-| email              | string  | unique: true |
-| encrypted_password | string  | null: false  |
-| last-name          | text    | null: false  |
-| first-name         | text    | null: false  |
-| last-name-kana     | text    | null: false  |
-| first-name-kana    | text    | null: false  |
-| birth-date         | integer | null: false  |
+| Column             | Type    | Options                   |
+| ------------------ | ------- | ------------------------- |
+| nickname           | text    | null: false               |
+| email              | string  | unique: true, null: false |
+| encrypted_password | string  | null: false               |
+| last_name          | string  | null: false               |
+| first_name         | string  | null: false               |
+| last_name_kana     | string  | null: false               |
+| first_name_kana    | string  | null: false               |
+| birth_date         | date    | null: false               |
 
 ### Association
 
@@ -46,54 +46,52 @@ Things you may want to cover:
 
 ## items テーブル
 
-| Column             | Type       | Options                        |
-| ------------------ | ---------- | ------------------------------ |
-| name               | string     | null: false                    |
-| image              | text       | null: false                    |
-| info               | string     | null: false                    |
-| sales-status       | string     | null: false                    |
-| shipping-fee       | text       | null: false                    |
-| prefecture         | text       | null: false                    |
-| scheduled-delivery | text       | null: false                    |
-| price              | text       | null: false                    |
-| seller             | references | null: false, foreign_key: true |
+| Column                | Type       | Options                        |
+| --------------------- | ---------- | ------------------------------ |
+| name                  | string     | null: false                    |
+| info                  | text       | null: false                    |
+| sales_status_id       | integer    | null: false                    |
+| shipping_fee_id       | integer    | null: false                    |
+| prefecture_id         | integer    | null: false                    |
+| scheduled_delivery_id | integer    | null: false                    |
+| price                 | integer    | null: false                    |
+| user                  | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- belongs_to :order
+- has_one :order
+- belongs_to_active_hash :sales_status_id
+- belongs_to_active_hash :shipping_fee_id
+- belongs_to_active_hash :prefecture_id
+- belongs_to_active_hash :scheduled_delivery_id
 
 ## orders テーブル
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
-| name          | references | null: false, foreign_key: true |
-| image         | references | null: false, foreign_key: true |
-| price         | references | null: false, foreign_key: true |
-| shipping-fee  | references | null: false, foreign_key: true |
-| payment-price | references | null: false, foreign_key: true |
-| card-number   | integer    | null: false                    |
-| exp-month     | integer    | null: false                    |
-| exp-year      | integer    | null: false                    |
-| card-cvc      | integer    | null: false                    |
+| user          | references | null: false, foreign_key: true |
+| item          | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :item
 - belongs_to :user
-- belongs_to :buyer
+- has_one :buyer
 
 ## buyers テーブル
 
-| Column       | Type    | Options     |
-| ------------ | ------- | ----------- |
-| postal-code  | integer | null: false |
-| prefecture   | string  | null: false |
-| city         | string  | null: false |
-| address      | string  | null: false |
-| building     | string  |             |
-| phone-number | integer | null: false |
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| postal_code   | string     | null: false                    |
+| prefecture_id | integer    | null: false                    |
+| city          | string     | null: false                    |
+| address       | string     | null: false                    |
+| building      | string     |                                |
+| phone_number  | string     | null: false                    |
+| order         | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :order
+- belongs_to_active_hash :prefecture_id
