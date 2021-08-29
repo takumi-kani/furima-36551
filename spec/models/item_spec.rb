@@ -10,6 +10,10 @@ RSpec.describe Item, type: :model do
         it "全ての項目の入力が存在すれば登録できること" do
           expect(@item).to be_valid
         end
+        it "カテゴリーの情報が必須であること" do
+          @item.category_id = "1"
+          expect(@item).to be_valid
+        end
         it "priceが半角数字であれば登録できる" do
           @item.price = "1111"
           expect(@item).to be_valid
