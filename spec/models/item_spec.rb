@@ -11,7 +11,23 @@ RSpec.describe Item, type: :model do
           expect(@item).to be_valid
         end
         it "カテゴリーの情報が必須であること" do
-          @item.category_id = "1"
+          @item.category_id = "3"
+          expect(@item).to be_valid
+        end
+        it "商品の状態についての情報が必須であること" do
+          @item.sales_status_id = "3"
+          expect(@item).to be_valid
+        end
+        it "配送料の負担についての情報が必須であること" do
+          @item.shipping_fee_id = "3"
+          expect(@item).to be_valid
+        end
+        it "発送元の地域についての情報が必須であること" do
+          @item.prefecture_id = "3"
+          expect(@item).to be_valid
+        end
+        it "発送までの日数についての情報が必須であること" do
+          @item.scheduled_delivery_id = "3"
           expect(@item).to be_valid
         end
         it "priceが半角数字であれば登録できる" do
@@ -35,30 +51,30 @@ RSpec.describe Item, type: :model do
           @item.valid?
           expect(@item.errors.full_messages).to include "Info can't be blank"
         end
-        it "category_idが空では登録できない" do
-          @item.category_id = ""
+        it "category_idが1では登録できない" do
+          @item.category_id = "1"
           @item.valid?
-          expect(@item.errors.full_messages).to include "Category can't be blank"
+          expect(@item.errors.full_messages).to include "Category must be other than 1"
         end
-        it "sales_status_idが空では登録できない" do
-          @item.sales_status_id = ""
+        it "sales_status_idが1では登録できない" do
+          @item.sales_status_id = "1"
           @item.valid?
-          expect(@item.errors.full_messages).to include "Sales status can't be blank"
+          expect(@item.errors.full_messages).to include "Sales status must be other than 1"
         end
-        it "shipping_fee_idが空では登録できない" do
-          @item.shipping_fee_id = ""
+        it "shipping_fee_idが1では登録できない" do
+          @item.shipping_fee_id = "1"
           @item.valid?
-          expect(@item.errors.full_messages).to include "Shipping fee can't be blank"
+          expect(@item.errors.full_messages).to include "Shipping fee must be other than 1"
         end
-        it "prefecture_idが空では登録できない" do
-          @item.prefecture_id = ""
+        it "prefecture_idが1では登録できない" do
+          @item.prefecture_id = "1"
           @item.valid?
-          expect(@item.errors.full_messages).to include "Prefecture can't be blank"
+          expect(@item.errors.full_messages).to include "Prefecture must be other than 1"
         end
-        it "scheduled_delivery_idが空では登録できない" do
-          @item.scheduled_delivery_id = ""
+        it "scheduled_delivery_idが1では登録できない" do
+          @item.scheduled_delivery_id = "1"
           @item.valid?
-          expect(@item.errors.full_messages).to include "Scheduled delivery can't be blank"
+          expect(@item.errors.full_messages).to include "Scheduled delivery must be other than 1"
         end
         it "priceが空では登録できない" do
           @item.price = ""
