@@ -5,10 +5,14 @@ window.addEventListener("load",()=>{
     const inputValue = inputPrice.value;
 
     const addTax = document.getElementById("add-tax-price")
-    addTax.innerHTML = (Math.floor(inputValue * 0.1));
+    const taxNum = (Math.floor(inputValue * 0.1))
+    addTax.innerHTML = taxNum.toLocaleString();
 
     const profitPrice = document.getElementById("profit")
       const price_result = inputValue * 0.1
-      profitPrice.innerHTML = (Math.ceil(inputValue - price_result));
+      const priceNum = (Math.ceil(inputValue - price_result))
+      profitPrice.innerHTML = priceNum.toLocaleString();
   })
 })
+
+.toLocaleString()
