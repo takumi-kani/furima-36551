@@ -2,7 +2,6 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item, :redirect_root
   def index
-    set_item
     @order_buyer = OrderBuyer.new
   end
 
